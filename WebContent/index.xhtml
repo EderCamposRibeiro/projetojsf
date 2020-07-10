@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Olá jsf</title>
+	<script>
+		function alterarValorDoCampo() {
+			var campo = document.getElementById('formPessoa:nome');
+			campo.value = 'eu cliquei no campo :)';
+		}
+	</script>
+</h:head>
+<h:body>
+	<h:form id="formPessoa">
+	
+		<h1>Olá JSF página index.jsf</h1>
+		
+		<h:inputText id="nome" onclick="this.value='troquei o valor'" onchange="this.value = this.value.toUpperCase()"/>
+		<h:commandButton value="Clicar" onclick="alterarValorDoCampo();"/>
+		
+		<br/>
+		<br/>
+		<h:commandButton value="Navegar" action="primeirapagina.xhtml" />
+		<br/>
+		<h:commandButton value="Navegar Explicita" action="explicita" />
+
+	</h:form>
+</h:body>
+</html>
+
+
+
+
+
+
+
+
