@@ -35,6 +35,17 @@
 			<h:column>
 				<h:outputText value="#{pessoa.id}"/>
 			</h:column>
+			<h:column>
+				<h:outputText value="#{pessoa.nome}"/>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{pessoa.sobrenome}"/>
+			</h:column>		
+			<h:column>
+				<h:commandLink value="Editar">
+					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
+				</h:commandLink>
+			</h:column>	
 		</h:dataTable>		
 
 	</h:form>
