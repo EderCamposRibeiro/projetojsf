@@ -1,6 +1,7 @@
 package br.com.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -64,7 +65,36 @@ public class DaoGeneric<E> implements Serializable{
 			
 		entityTransaction.commit();
 		entityManager.close();
+	}
+	
+	public List<E> getListEntity(Class<E> entidade){
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();	
 		
+		String entidadeSplit[] = entidade.getName().split("br.com.entidades.");
+		String entidadePura = entidadeSplit[1];		
+		@SuppressWarnings("unchecked")
+		List<E> retorno = entityManager.createQuery("from " + entidadePura + " e " ).getResultList();
+		
+		entityTransaction.commit();
+		entityManager.close();
+		
+		return retorno;
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,7 +29,13 @@
 		<br/> 
 		<h:commandButton value="Novo" action="#{pessoaBean.novo}"/>
 		<h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>	
-		<h:commandButton value="Remover" action="#{pessoaBean.remove}"/>		
+		<h:commandButton value="Remover" action="#{pessoaBean.remove}"/>
+		
+		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
+			<h:column>
+				<h:outputText value="#{pessoa.id}"/>
+			</h:column>
+		</h:dataTable>		
 
 	</h:form>
 </h:body>
