@@ -12,9 +12,9 @@
 
 		<h1>Olá JSF</h1>
 		<br />
-		<h:panelGrid columns="2">
-			<f:facet name="header">
-				<h:outputText value="Cadastro em jsf:" />
+		<h:panelGrid columns="2" >
+			<f:facet name="header" >
+				<h:outputText id="cadastro" value="Cadastro em jsf:" />
 			</f:facet>
 			<h:outputLabel for="id" value="Id:" />
 			<h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true" />
@@ -24,7 +24,7 @@
 			<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}" />
 			<h:outputLabel for="idade" value="Idade:" />
 			<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" />
-			<h:outputLabel/>
+			<h:outputLabel />
 			<h:panelGroup>
 				<h:commandButton value="Novo" action="#{pessoaBean.novo}" />
 				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" />
@@ -33,28 +33,38 @@
 		</h:panelGrid>
 
 
-		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
-			<h:column>
-				<h:outputText value="#{pessoa.id}" />
+		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="pessoas" border="3" cellpadding="6">
+
+			<f:facet name="header" >
+				Lista de pessoas cadastradas:
+			</f:facet>
+			<h:column >
+				<f:facet name="header">ID</f:facet>
+				<h:outputText id="pessoaid" value="#{pessoa.id}" />
 			</h:column>
 			<h:column>
-				<h:outputText value="#{pessoa.nome}" />
+				<f:facet name="header">Nome da pessoa</f:facet>
+				<h:outputText id="pessoanome" value="#{pessoa.nome}" />
 			</h:column>
 			<h:column>
-				<h:outputText value="#{pessoa.sobrenome}" />
+				<f:facet name="header">Sobrenome da pessoa</f:facet>
+				<h:outputText id="pessoasobrenome" value="#{pessoa.sobrenome}" />
 			</h:column>
 			<h:column>
-				<h:commandLink value="Editar">
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink value="Editar" >
 					<f:setPropertyActionListener value="#{pessoa}"
 						target="#{pessoaBean.pessoa}" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Excluir</f:facet>
 				<h:commandLink value="Excluir" action="#{pessoaBean.remove}">
 					<f:setPropertyActionListener value="#{pessoa}"
 						target="#{pessoaBean.pessoa}" />
-				</h:commandLink>
-			</h:column>
+				</h:commandLink>				
+			</h:column>			
+
 		</h:dataTable>
 
 	</h:form>
