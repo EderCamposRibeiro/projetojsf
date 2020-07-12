@@ -9,49 +9,53 @@
 </h:head>
 <h:body>
 	<h:form id="formPessoa">
-	
+
 		<h1>Olá JSF</h1>
-		<br/>
-		<h:outputLabel for="id" value="Id:"/>
-	    <h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true"/>
-	    <br/>		
-		<h:outputLabel for="nome" value="Nome:"/>
-		<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}"/>
-		<br/>
-		<h:outputLabel for="sobrenome" value="Sobrenome:"/>
-		<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}"/>
-		<br/>
-		<h:outputLabel for="idade" value="Idade:"/>
-		<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}"/>
-		<!-- <br/>
-		<h:outputLabel value="Data de Nascimento:"/>
-		<h:inputText value="#{pessoaBean.pessoa.dataNascimento}"/>  -->
-		<br/> 
-		<h:commandButton value="Novo" action="#{pessoaBean.novo}"/>
-		<h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>	
-		<h:commandButton value="Remover" action="#{pessoaBean.remove}"/>
-		
+		<br />
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Cadastro em jsf:" />
+			</f:facet>
+			<h:outputLabel for="id" value="Id:" />
+			<h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true" />
+			<h:outputLabel for="nome" value="Nome:" />
+			<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" />
+			<h:outputLabel for="sobrenome" value="Sobrenome:" />
+			<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}" />
+			<h:outputLabel for="idade" value="Idade:" />
+			<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" />
+			<h:outputLabel/>
+			<h:panelGroup>
+				<h:commandButton value="Novo" action="#{pessoaBean.novo}" />
+				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" />
+				<h:commandButton value="Remover" action="#{pessoaBean.remove}" />
+			</h:panelGroup>
+		</h:panelGrid>
+
+
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
 			<h:column>
-				<h:outputText value="#{pessoa.id}"/>
+				<h:outputText value="#{pessoa.id}" />
 			</h:column>
 			<h:column>
-				<h:outputText value="#{pessoa.nome}"/>
+				<h:outputText value="#{pessoa.nome}" />
 			</h:column>
 			<h:column>
-				<h:outputText value="#{pessoa.sobrenome}"/>
-			</h:column>		
+				<h:outputText value="#{pessoa.sobrenome}" />
+			</h:column>
 			<h:column>
 				<h:commandLink value="Editar">
-					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
+					<f:setPropertyActionListener value="#{pessoa}"
+						target="#{pessoaBean.pessoa}" />
 				</h:commandLink>
-			</h:column>	
+			</h:column>
 			<h:column>
 				<h:commandLink value="Excluir" action="#{pessoaBean.remove}">
-					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
+					<f:setPropertyActionListener value="#{pessoa}"
+						target="#{pessoaBean.pessoa}" />
 				</h:commandLink>
-			</h:column>				
-		</h:dataTable>		
+			</h:column>
+		</h:dataTable>
 
 	</h:form>
 </h:body>
