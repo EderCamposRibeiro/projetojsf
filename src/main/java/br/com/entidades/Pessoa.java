@@ -8,13 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-@Entity()
-@Table(name = "pessoa", schema = "public")
+@Entity
 public class Pessoa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -30,6 +28,8 @@ public class Pessoa implements Serializable{
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
+	
+	private String sexo;
 	
 	public Pessoa() {
 		
@@ -66,6 +66,14 @@ public class Pessoa implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 	
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	
+	public String getSexo() {
+		return sexo;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,7 +102,7 @@ public class Pessoa implements Serializable{
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
-				+ ", dataNascimento=" + dataNascimento + "]";
+				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + "]";
 	}
 	
 	

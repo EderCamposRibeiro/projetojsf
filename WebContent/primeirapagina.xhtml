@@ -19,14 +19,26 @@
 			<f:facet name="header" >
 				<h:outputText id="cadastro" value="Cadastro em jsf:" />
 			</f:facet>
+			
 			<h:outputLabel for="id" value="Id:" />
 			<h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true" />
+			
 			<h:outputLabel for="nome" value="Nome:" />
 			<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" />
+			
 			<h:outputLabel for="sobrenome" value="Sobrenome:" />
 			<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}" />
+			
 			<h:outputLabel for="idade" value="Idade:" />
 			<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" />
+			
+			<h:outputLabel for="campoSexo" value="Sexo:" />
+			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="true">
+				<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+				 <f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
+				 <f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
+			</h:selectOneMenu>			
+			
 			<h:outputLabel />
 			<h:panelGroup>
 				<h:commandButton value="Novo" action="#{pessoaBean.novo}" />

@@ -4,14 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.dao.DaoGeneric;
 import br.com.entidades.Pessoa;
 
+
 @ViewScoped
-@ManagedBean
+@ManagedBean(name = "pessoaBean")
 public class PessoaBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -38,6 +40,7 @@ public class PessoaBean implements Serializable{
 		return "";
 	}
 	
+	@PostConstruct
 	public void carregarPessoas() {
 		pessoas = daoGeneric.getListEntity(Pessoa.class);
 	}
