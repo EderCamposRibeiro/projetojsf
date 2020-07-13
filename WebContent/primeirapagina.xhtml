@@ -47,8 +47,10 @@
 				 <f:selectItem itemValue="Jpa" />
 				 <f:selectItem itemValue="PrimeFaces" />
 				 <f:selectItem itemValue="JSF" />
-			</h:selectManyMenu>				
-					
+			</h:selectManyMenu>		
+			
+			<h:outputLabel for="campoAtivo" value="Ativo:" />	
+			<h:selectBooleanCheckbox id="campoAtivo" value="#{pessoaBean.pessoa.ativo}" />	
 			
 			<h:outputLabel />
 			<h:panelGroup>
