@@ -11,9 +11,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-public class Pessoa implements Serializable{
+public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,59 +20,78 @@ public class Pessoa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
 	@SequenceGenerator(name = "pessoa_seq", sequenceName = "seq_pessoa", allocationSize = 1, schema = "public", initialValue = 1)
 	private Long id;
-	
+
 	private String nome;
 	private String sobrenome;
 	private Integer idade;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
-	
+
 	private String sexo;
-	
+
+	private String[] frameworks;
+
 	public Pessoa() {
-		
+
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getSobrenome() {
 		return sobrenome;
 	}
+
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
+
 	public Integer getIdade() {
 		return idade;
 	}
+
 	public void setIdade(Integer idade) {
 		this.idade = idade;
 	}
+
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
+
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
+
 	public String getSexo() {
 		return sexo;
 	}
+
+	public void setFrameworks(String[] frameworks) {
+		this.frameworks = frameworks;
+	}
 	
+	public String[] getFrameworks() {
+		return frameworks;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,9 +122,5 @@ public class Pessoa implements Serializable{
 		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
 				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + "]";
 	}
-	
-	
-	
-	
 
 }
