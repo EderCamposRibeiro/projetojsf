@@ -27,12 +27,10 @@ public class FilterAutenticacao implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		System.out.println("Invocando filter!!!!");
-		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
-		Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
+		String usuarioLogado = (String) session.getAttribute("usuarioLogado");
 		
 		String url = req.getServletPath();
 		

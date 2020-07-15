@@ -8,8 +8,19 @@
 	<title>Login</title>
 </h:head>
 <h:body>
-	<h:form id="formLogin">
+	<h:form id="formLogin" style="margin-top:22%; margin-left:40%">
 		<h1>Realize o login</h1>
+		
+		<h:panelGrid columns="2">
+			
+			<h:outputLabel for="login" value="Login:"/>
+			<h:inputText id="login" value="#{pessoaBean.pessoa.login}"/>
+			
+			<h:outputLabel for="senha" value="Senha:"/>
+			<h:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}"/>
+			
+			<h:commandButton value="Acessar" action="#{pessoaBean.logar}"/>			
+		</h:panelGrid>
 
 	</h:form>
 </h:body>
