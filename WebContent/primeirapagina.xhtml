@@ -11,7 +11,7 @@
 	<h:form id="formPessoa">
 
 		<br />
-		<h:panelGrid columns="2" >
+		<h:panelGrid columns="2"  >
 			<f:facet name="header" >
 				<h:outputText id="cadastro" value="Cadastro de Usuário" />
 			</f:facet>
@@ -66,14 +66,15 @@
 			<h:outputLabel />
 			<h:panelGroup>
 				<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="/resources/img/novo.png" title="Novo"/>
-				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="/resources/img/salvar.png" title="Salvar" />
-				<h:commandButton value="Remover" action="#{pessoaBean.remove}" image="/resources/img/remover.png" title="Remover"/>
-				<h:commandButton value="Limpar" type="reset" image="/resources/img/limpar.png" title="Limpar" />
+				<h:commandButton style="margin-left:1cm;" value="Salvar" action="#{pessoaBean.salvar}" image="/resources/img/salvar.png" title="Salvar" />
+				<h:commandButton style="margin-left:1cm;" value="Remover" action="#{pessoaBean.remove}" image="/resources/img/remover.png" title="Remover"
+								 rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
+				<h:commandButton style="margin-left:1cm;" value="Limpar" type="reset" image="/resources/img/limpar.png" title="Limpar" />
 			</h:panelGroup>
 		</h:panelGrid>
 
 
-		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="pessoas" border="3" cellpadding="6">
+		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="pessoas" border="3" cellpadding="6" >
 
 			<f:facet name="header" >
 				Lista de Usuários Cadastrados:
@@ -97,7 +98,7 @@
 					<h:graphicImage value="/resources/img/editar.png" title="Editar" />
 				</h:commandLink>
 			</h:column>
-			<h:column>
+			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<f:facet name="header">Excluir</f:facet>
 				<h:commandLink action="#{pessoaBean.remove}">
 					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
