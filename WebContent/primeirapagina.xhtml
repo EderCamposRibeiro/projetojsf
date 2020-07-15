@@ -8,7 +8,14 @@
 	<title>Cadastro de usuário</title>
 </h:head>
 <h:body>
-	<h:form id="formPessoa">
+
+	<h:form>
+		<h:commandLink value="Administração" action="primeirapagina"/>
+		<h:commandLink value="Lacaçamentos" action="lancamento" style="margin-left:1cm;"/>
+		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:1cm;"/>
+	</h:form>
+	
+	<h:form id="formPessoa" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 
 		<br />
 		<h:panelGrid columns="2"  >
