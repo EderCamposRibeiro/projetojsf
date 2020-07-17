@@ -9,16 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import org.hibernate.annotations.ForeignKey;
-
 @Entity
 public class Lancamento implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lancamento_seq")
-	@SequenceGenerator(name = "lancamento_seq", sequenceName = "seq_lancamento", allocationSize = 1, schema = "public", initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lanc_seq")
+	@SequenceGenerator(name = "lanc_seq", sequenceName = "seq_lanc", allocationSize = 1, schema = "public", initialValue = 1)	
 	private Long id;
 	
 	private String numeroNotaFiscal;
@@ -28,8 +26,12 @@ public class Lancamento implements Serializable{
 	private String empresaDestino;
 	
 	@ManyToOne(optional = false)
-	@ForeignKey(name = "usuario_fk")
+	@org.hibernate.annotations.ForeignKey(name = "usuario_id")
 	private Pessoa usuario;
+	
+	public Lancamento() {
+		
+	}
 
 	public Long getId() {
 		return id;

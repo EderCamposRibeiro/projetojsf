@@ -1,17 +1,48 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>LanÃ§amentos</title>
+	<title>Lançamentos</title>
 </h:head>
 <h:body>
-	<h:form id="formLancamento" style="margin-top:22%; margin-left:40%">
 
-
+	
+	<h:form>
+		<h:commandLink value="Administração" action="primeirapagina"/>
+		<h:commandLink value="Lançamentos" action="lancamento" style="margin-left:1cm;"/>
+		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:1cm;"/>
 	</h:form>
+
+	<h:form id="formLancamento" style="margin-top:22%; margin-left:40%">
+			<h:panelGrid columns="2" >
+				<f:facet name="header" >
+					<h:outputText id="lancamento" value="Lançamentos" />
+				</f:facet>
+
+				<h:outputLabel value="Id:" />
+				<h:inputText value="#{lancamentoBean.lancamento.id}" readonly="true" />
+
+				<h:outputLabel value="Número da Nota Fiscal:" />
+				<h:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" />
+
+				<h:outputLabel value="Empresa de Origem:" />
+				<h:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" />
+
+				<h:outputLabel value="Empresa de Destino:" />
+				<h:inputText value="#{lancamentoBean.lancamento.empresaDestino}" />
+				<h:outputLabel />
+				<h:panelGroup>
+					<h:commandButton value="Novo" action="#{lancamentoBean.novo}" image="/resources/img/novo.png" title="Novo" />
+					<h:commandButton style="margin-left:1cm;" value="Salvar" action="#{lancamentoBean.salvar}" image="/resources/img/salvar.png" title="Salvar" />
+					<h:commandButton style="margin-left:1cm;" value="Remover" action="#{lancamentoBean.remove}" image="/resources/img/remover.png" title="Remover"/>
+					<h:commandButton style="margin-left:1cm;" value="Limpar"
+						type="reset" image="/resources/img/limpar.png" title="Limpar" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</h:form>
 </h:body>
 </html>
 
