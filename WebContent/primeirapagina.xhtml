@@ -40,6 +40,11 @@
 				 <f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
 			</h:selectOneRadio>	
 			
+			<h:outputLabel for="dataNascimento" value="Data de Nascimento:" />
+			<h:inputText id="dataNascimento" value="#{pessoaBean.pessoa.dataNascimento}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:inputText>			
+			
 			<h:outputLabel for="campoFrameworks" value="Frameworks:" />
 			<h:selectManyMenu id="campoFrameworks" style="height:100px" 
 				value="#{pessoaBean.pessoa.frameworks}">
