@@ -37,11 +37,10 @@
 			<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" />
 			
 			<h:outputLabel for="campoSexo" value="Sexo:" />
-			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="false">
-				 <f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+			<h:selectOneRadio id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="false">
 				 <f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
 				 <f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
-			</h:selectOneMenu>	
+			</h:selectOneRadio>	
 			
 			<h:outputLabel for="campoFrameworks" value="Frameworks:" />
 			<h:selectManyMenu id="campoFrameworks" style="height:100px" 
@@ -70,6 +69,14 @@
 				 <f:selectItem itemValue="RECEPCIONISTA" itemLabel="Recepcionista"/>
 				 <f:selectItem itemValue="SECRETARIO" itemLabel="Secretário"/>
 			</h:selectOneMenu>
+
+			<h:outputLabel for="campoNivelProgramador" value="Nível do Programador:" />
+			<h:selectOneRadio id="campoNivelProgramador" value="#{pessoaBean.pessoa.nivelProgramador}" layout="pageDirection">
+				 <f:selectItem itemValue="JUNIOR" itemLabel="Junior"/>
+				 <f:selectItem itemValue="PLENO" itemLabel="Pleno"/>
+				 <f:selectItem itemValue="SENIOR" itemLabel="Sênior"/>
+				 <f:selectItem itemValue="ESPECIALISTA" itemLabel="Especialista"/>
+			</h:selectOneRadio>				
 			
 			<h:outputLabel />
 			<h:panelGroup>
