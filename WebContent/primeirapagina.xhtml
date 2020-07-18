@@ -41,8 +41,8 @@
 			</h:selectOneRadio>	
 			
 			<h:outputLabel for="dataNascimento" value="Data de Nascimento:" />
-			<h:inputText id="dataNascimento" value="#{pessoaBean.pessoa.dataNascimento}">
-				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			<h:inputText id="dataNascimento" value="#{pessoaBean.pessoa.dataNascimento}" converterMessage="Data de nascimento inválida!">
+				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
 			</h:inputText>			
 			
 			<h:outputLabel for="campoFrameworks" value="Frameworks:" />
