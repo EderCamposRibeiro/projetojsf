@@ -43,9 +43,16 @@ public class PessoaBean implements Serializable{
 	}
 
 	public String novo() {
+		/*Executa algum processo antes de Novo*/
 		pessoa = new Pessoa();
 		return "";
 	}
+	
+	public String limpar() {
+		/*Executa algum processo antes de Limpar*/
+		pessoa = new Pessoa();
+		return "";
+	}	
 	
 	public String remove() {
 		daoGeneric.deletePorId(pessoa);

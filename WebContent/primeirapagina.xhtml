@@ -26,7 +26,7 @@
 			<h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true" />
 			
 			<h:outputLabel for="nome" value="Nome:" />
-			<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true"
+			<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true" 
 				requiredMessage="Informe nome do usuário!"
 				validatorMessage="Nome deve ter no mínimo 3 letras!">
 				<f:validateLength minimum="3" maximum="50"/>
@@ -96,15 +96,21 @@
 			
 			<h:outputLabel />
 			<h:panelGroup>
-				<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="/resources/img/novo.png" title="Novo"/>
+				<h:commandButton value="Novo" id="botaoNovo" action="#{pessoaBean.novo}" image="/resources/img/novo.png" title="Novo">
+					<f:ajax execute="botaoNovo" render="@form"/>
+				</h:commandButton>
 				<h:commandButton style="margin-left:1cm;" value="Salvar" action="#{pessoaBean.salvar}" image="/resources/img/salvar.png" title="Salvar" />
 				<h:commandButton style="margin-left:1cm;" value="Remover" action="#{pessoaBean.remove}" image="/resources/img/remover.png" title="Remover"
 								 rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-				<h:commandButton style="margin-left:1cm;" value="Limpar" type="reset" image="/resources/img/limpar.png" title="Limpar" />
+				<h:commandButton style="margin-left:1cm;" id="botaoLimpar" value="Limpar" action="#{pessoaBean.limpar}" image="/resources/img/limpar.png" title="Limpar">
+					<f:ajax execute="botaoLimpar" render="@form"/>
+				</h:commandButton>
 			</h:panelGroup>
 		</h:panelGrid>
+		
+	</h:form>	
 
-
+	<h:form id="formTable">
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" id="pessoas" border="3" cellpadding="6" >
 
 			<f:facet name="header" >
@@ -138,8 +144,8 @@
 			</h:column>			
 
 		</h:dataTable>
-
 	</h:form>
+		
 </h:body>
 </html>
 
