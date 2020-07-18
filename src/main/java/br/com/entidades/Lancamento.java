@@ -97,6 +97,14 @@ public class Lancamento implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Lancamento [id=" + id + ", numeroNotaFiscal=" + numeroNotaFiscal + ", empresaOrigem=" + empresaOrigem
+				+ ", empresaDestino=" + empresaDestino + ", usuario=" + usuario + "]";
+	}
+	
+	
 	
 	
 	

@@ -33,7 +33,7 @@ public class LancamentoBean implements Serializable {
 		ExternalContext externalContext = context.getExternalContext();
 		Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("usuarioLogado");	
 		lancamento.setUsuario(pessoaUser);
-		daoGeneric.merge(lancamento);
+		lancamento = daoGeneric.merge(lancamento);
 		
 		carregarLancamentos();
 
