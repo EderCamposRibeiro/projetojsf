@@ -59,6 +59,11 @@
 				 <f:selectItem itemValue="JSF" />
 			</h:selectManyMenu>		
 			
+			<h:outputLabel for="campoCEP" value="CEP:"/>
+			<h:inputText id="campoCEP" value="#{pessoaBean.pessoa.cep}"> 
+				<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}"/>
+			</h:inputText>			
+			
 			<h:outputLabel for="campoAtivo" value="Ativo:" />	
 			<h:selectBooleanCheckbox id="campoAtivo" value="#{pessoaBean.pessoa.ativo}" />	
 			

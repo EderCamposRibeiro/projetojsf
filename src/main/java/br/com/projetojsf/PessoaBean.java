@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import br.com.dao.DaoGeneric;
 import br.com.entidades.Pessoa;
@@ -65,6 +66,10 @@ public class PessoaBean implements Serializable{
 	@PostConstruct
 	public void carregarPessoas() {
 		pessoas = daoGeneric.getListEntity(Pessoa.class);
+	}
+	
+	public void pesquisaCep(AjaxBehaviorEvent event) {
+		System.out.println("Método pesquisa cep chamado CEP: " + pessoa.getCep());
 	}
 	
 
