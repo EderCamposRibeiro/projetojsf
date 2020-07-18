@@ -59,7 +59,7 @@
 			<h:inputText id="campoLogin" value="#{pessoaBean.pessoa.login}"/>
 			
 			<h:outputLabel for="campoSenha" value="Senha"/>
-			<h:inputSecret id="campoSenha" value="#{pessoaBean.pessoa.senha}"/>
+			<h:inputSecret id="campoSenha" value="#{pessoaBean.pessoa.senha}" />
 			
 			<h:outputLabel for="campoPerfil" value="Perfil do Usuário:" />
 			<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfilUser}" required="false">
@@ -76,7 +76,16 @@
 				 <f:selectItem itemValue="PLENO" itemLabel="Pleno"/>
 				 <f:selectItem itemValue="SENIOR" itemLabel="Sênior"/>
 				 <f:selectItem itemValue="ESPECIALISTA" itemLabel="Especialista"/>
-			</h:selectOneRadio>				
+			</h:selectOneRadio>		
+			
+			<h:outputLabel for="campoLinguagem" value="Linguagens:" />
+			<h:selectManyCheckbox id="campoLinguagem" value="#{pessoaBean.pessoa.linguagens}">
+				 <f:selectItem itemValue="1" itemLabel="Java"/>
+				 <f:selectItem itemValue="2" itemLabel="PHP"/>
+				 <f:selectItem itemValue="3" itemLabel="Pyton"/>
+				 <f:selectItem itemValue="4" itemLabel="C#"/>
+				 <f:selectItem itemValue="5" itemLabel="Cobol"/>
+			</h:selectManyCheckbox>						
 			
 			<h:outputLabel />
 			<h:panelGroup>
