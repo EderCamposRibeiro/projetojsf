@@ -16,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -104,10 +105,6 @@ public class PessoaBean implements Serializable{
 			pessoa.setIbge(gsonAux.getIbge());
 			pessoa.setGia(gsonAux.getGia());
 			
-			
-			
-			
-			
 			br.close();
 			
 		} catch (Exception e) {
@@ -149,6 +146,20 @@ public class PessoaBean implements Serializable{
 			
 			return "primeirapagina.jsf";
 		}
+		
+		return "index.jsf";
+	}
+	
+	public String deslogar() {
+		/*Derruba o usuário da sessão 'usuarioLogado'*/
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		externalContext.getSessionMap().remove("usuarioLogado");
+		
+		HttpServletRequest httpServletRequest = (HttpServletRequest) context.getCurrentInstance().
+		getExternalContext().getRequest();
+		
+		httpServletRequest.getSession().invalidate();
 		
 		return "index.jsf";
 	}
