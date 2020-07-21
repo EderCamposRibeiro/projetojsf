@@ -17,12 +17,16 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.springframework.context.annotation.Configuration;
+
+import com.google.gson.Gson;
+
 import br.com.dao.DaoGeneric;
 import br.com.entidades.Pessoa;
 import br.com.repository.IDaoPessoa;
 import br.com.repository.IDaoPessoaImpl;
 
-
+@Configuration
 @ViewScoped
 @ManagedBean(name = "pessoaBean")
 public class PessoaBean implements Serializable{
@@ -74,6 +78,7 @@ public class PessoaBean implements Serializable{
 	}
 	
 	public void pesquisaCep(AjaxBehaviorEvent event) {
+
 		try {
 			URL url = new URL("https://viacep.com.br/ws/" + pessoa.getCep() +"/json/");
 			URLConnection connection = url.openConnection();
@@ -87,17 +92,31 @@ public class PessoaBean implements Serializable{
 				jsonCep.append(cep);
 			}
 			
-			System.out.println(jsonCep);
+			Pessoa gsonAux = new Gson().fromJson(jsonCep.toString(), Pessoa.class);
+			
+			pessoa.setCep(gsonAux.getCep());
+			pessoa.setLogradouro(gsonAux.getLogradouro());
+			pessoa.setComplemento(gsonAux.getComplemento());
+			pessoa.setBairro(gsonAux.getBairro());
+			pessoa.setLocalidade(gsonAux.getLocalidade());
+			pessoa.setUf(gsonAux.getUf());
+			pessoa.setUnidade(gsonAux.getUnidade());
+			pessoa.setIbge(gsonAux.getIbge());
+			pessoa.setGia(gsonAux.getGia());
+			
+			System.out.println(gsonAux);
+			
+			
 			
 			br.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			mostrarMsg("Erro ao consultar o cep");
+			mostrarMsg("Erro ao consultar o cep!");
 		}
+		
 	}
 	
-
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -142,5 +161,7 @@ public class PessoaBean implements Serializable{
 		
 		return pessoaUser.getPerfilUser().equals(acesso);
 	}
+
+
 	
 }
