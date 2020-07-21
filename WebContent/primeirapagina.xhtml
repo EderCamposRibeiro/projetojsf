@@ -61,8 +61,35 @@
 			
 			<h:outputLabel for="campoCEP" value="CEP:"/>
 			<h:inputText id="campoCEP" value="#{pessoaBean.pessoa.cep}"> 
-				<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}"/>
-			</h:inputText>			
+				<f:ajax event="blur" execute="@this" 
+				 listener="#{pessoaBean.pesquisaCep}"
+				 render="campoLogradouro campoComplemento campoBairro campoLocalidade campoUf campoUnidade campoIbge campoGia"
+				/>
+			</h:inputText>
+			
+			<h:outputLabel for="campoLogradouro" value="Logradouro:"/>
+			<h:inputText id="campoLogradouro" value="#{pessoaBean.pessoa.logradouro}" />
+
+			<h:outputLabel for="campoComplemento" value="Complemento:"/>
+			<h:inputText id="campoComplemento" value="#{pessoaBean.pessoa.complemento}" />
+			
+			<h:outputLabel for="campoBairro" value="Bairro:"/>
+			<h:inputText id="campoBairro" value="#{pessoaBean.pessoa.bairro}" />
+			
+			<h:outputLabel for="campoLocalidade" value="Cidade:"/>
+			<h:inputText id="campoLocalidade" value="#{pessoaBean.pessoa.localidade}" />
+			
+			<h:outputLabel for="campoUf" value="UF:"/>
+			<h:inputText id="campoUf" value="#{pessoaBean.pessoa.uf}" />	
+			
+			<h:outputLabel for="campoUnidade" value="Unidade:"/>
+			<h:inputText id="campoUnidade" value="#{pessoaBean.pessoa.unidade}" />	
+
+			<h:outputLabel for="campoIbge" value="Ibge:"/>
+			<h:inputText id="campoIbge" value="#{pessoaBean.pessoa.ibge}" />	
+
+			<h:outputLabel for="campoGia" value="Gia:"/>
+			<h:inputText id="campoGia" value="#{pessoaBean.pessoa.gia}" />
 			
 			<h:outputLabel for="campoAtivo" value="Ativo:" />	
 			<h:selectBooleanCheckbox id="campoAtivo" value="#{pessoaBean.pessoa.ativo}" />	

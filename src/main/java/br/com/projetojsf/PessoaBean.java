@@ -104,7 +104,7 @@ public class PessoaBean implements Serializable{
 			pessoa.setIbge(gsonAux.getIbge());
 			pessoa.setGia(gsonAux.getGia());
 			
-			System.out.println(gsonAux);
+			
 			
 			
 			
