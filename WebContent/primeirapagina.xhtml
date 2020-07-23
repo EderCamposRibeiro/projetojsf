@@ -125,7 +125,12 @@
 				 <f:selectItem itemValue="3" itemLabel="Pyton"/>
 				 <f:selectItem itemValue="4" itemLabel="C#"/>
 				 <f:selectItem itemValue="5" itemLabel="Cobol"/>
-			</h:selectManyCheckbox>						
+			</h:selectManyCheckbox>		
+			
+			<h:outputLabel for="campoEstados" value="Estados:" />			
+			<h:selectOneMenu id="campoEstados" value="#{pessoaBean.pessoa.estados}">
+				<f:selectItems value="#{pessoaBean.estados}"/>
+			</h:selectOneMenu>	
 			
 			<h:outputLabel />
 			<h:panelGroup>
