@@ -8,6 +8,8 @@
 	<persistence-unit name="projetojsf">
 		<class>br.com.entidades.Pessoa</class>
 		<class>br.com.entidades.Lancamento</class>
+		<class>br.com.entidades.Estados</class>
+		<class>br.com.entidades.Cidades</class>
 		<properties>
 			<!-- Dados de conexão com o Banco de Dados -->
 			<property

@@ -27,9 +27,10 @@
 			
 			<h:outputLabel for="nome" value="Nome:" />
 			<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true" 
-				requiredMessage="Informe nome do usuário!"
-				validatorMessage="Nome deve ter no mínimo 3 letras!">
-				<f:validateLength minimum="3" maximum="50"/>
+				requiredMessage="Informe nome do usuário!" 
+				validatorMessage="Nome deve ter no mínimo 3 letras!"  >
+				<f:validateLength minimum="3" maximum="50" />
+			
 			</h:inputText>
 			
 			<h:outputLabel for="sobrenome" value="Sobrenome:" />
