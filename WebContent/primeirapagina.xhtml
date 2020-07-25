@@ -127,9 +127,11 @@
 				 <f:selectItem itemValue="5" itemLabel="Cobol"/>
 			</h:selectManyCheckbox>		
 			
-			<h:outputLabel for="campoEstados" value="Estados:" />			
-			<h:selectOneMenu id="campoEstados" value="#{pessoaBean.pessoa.estados}">
+			<h:outputLabel value="Estados:" />			
+			<h:selectOneMenu value="#{pessoaBean.pessoa.estados}" immediate="true">
+				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true" />
 				<f:selectItems value="#{pessoaBean.estados}"/>
+				<f:ajax event="change" execute="@this" listener="#{pessoaBean.carregaCidades}"/>
 			</h:selectOneMenu>	
 			
 			<h:outputLabel />

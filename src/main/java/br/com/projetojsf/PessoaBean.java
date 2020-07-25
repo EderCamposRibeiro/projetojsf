@@ -180,6 +180,13 @@ public class PessoaBean implements Serializable{
 		estados = iDaoPessoa.listaEstados();
 		return estados;
 	}
+	
+	public void carregaCidades(AjaxBehaviorEvent event) {
+		String codigoEstado =  (String) event.getComponent().getAttributes().get("value");
+		if (codigoEstado != null) {
+			System.out.println(codigoEstado);
+		}
+	}
 
 
 	
