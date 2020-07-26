@@ -24,7 +24,10 @@ import org.springframework.context.annotation.Configuration;
 import com.google.gson.Gson;
 
 import br.com.dao.DaoGeneric;
+import br.com.entidades.Cidades;
+import br.com.entidades.Estados;
 import br.com.entidades.Pessoa;
+import br.com.jpautil.JPAUtil;
 import br.com.repository.IDaoPessoa;
 import br.com.repository.IDaoPessoaImpl;
 
@@ -42,6 +45,8 @@ public class PessoaBean implements Serializable{
 	private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
 	
 	private List<SelectItem> estados;
+	
+	private List<SelectItem> cidades;
 	
 	public String salvar() {
 		pessoa = daoGeneric.merge(pessoa);
@@ -184,10 +189,32 @@ public class PessoaBean implements Serializable{
 	public void carregaCidades(AjaxBehaviorEvent event) {
 		String codigoEstado =  (String) event.getComponent().getAttributes().get("value");
 		if (codigoEstado != null) {
-			System.out.println(codigoEstado);
+			Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
+			
+			if (estado != null) {
+				pessoa.setEstados(estado);
+				
+				List<Cidades> cidades = JPAUtil.getEntityManager()
+						.createQuery(" from Cidades c where estados.id = " +codigoEstado).getResultList();
+				
+				List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
+				
+				for (Cidades cidade : cidades) {
+					selectItemsCidade.add(new SelectItem(cidade.getId(), cidade.getNome()));
+				}
+				
+				setCidades(selectItemsCidade);
+			}
 		}
 	}
 
+	public List<SelectItem> getCidades() {
+		return cidades;
+	}
+	
+	public void setCidades(List<SelectItem> cidades) {
+		this.cidades = cidades;
+	}
 
 	
 }
