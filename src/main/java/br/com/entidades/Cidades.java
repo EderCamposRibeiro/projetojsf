@@ -3,12 +3,14 @@ package br.com.entidades;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Cidades implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +22,7 @@ public class Cidades implements Serializable{
 	private String nome;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private Estados estados_id;
+	private Estados estados;
 
 	public Long getId() {
 		return id;
@@ -38,13 +40,14 @@ public class Cidades implements Serializable{
 		this.nome = nome;
 	}
 
-	public Estados getEstados_id() {
-		return estados_id;
+	public Estados getEstados() {
+		return estados;
+	}
+	
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
-	public void setEstados_id(Estados estados_id) {
-		this.estados_id = estados_id;
-	}
 
 	@Override
 	public int hashCode() {
@@ -73,7 +76,7 @@ public class Cidades implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cidades [id=" + id + ", nome=" + nome + ", estados_id=" + estados_id + "]";
+		return "Cidades [id=" + id + ", nome=" + nome + ", estados=" + estados +  "]";
 	}
 	
 	
