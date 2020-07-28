@@ -187,7 +187,7 @@ public class PessoaBean implements Serializable {
 	}
 
 	public void carregaCidades(AjaxBehaviorEvent event) {
-		String codigoEstado = (String) event.getComponent().getAttributes().get("value");
+		String codigoEstado = (String) event.getComponent().getAttributes().get("submittedValue");
 		if (codigoEstado != null) {
 			Estados estado = JPAUtil.getEntityManager().find(Estados.class, Long.parseLong(codigoEstado));
 

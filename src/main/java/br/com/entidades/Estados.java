@@ -71,7 +71,7 @@ public class Estados implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Estados [id=" + id + ", nome=" + nome + ", sigla=" + sigla + "]";
+		return getId().toString();
 	}
 	
 	
