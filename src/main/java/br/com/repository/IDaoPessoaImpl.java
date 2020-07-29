@@ -45,7 +45,7 @@ public class IDaoPessoaImpl implements IDaoPessoa, Serializable {
 		List<Estados> estados = entityManager.createQuery(" from Estados e").getResultList();
 		
 		for (Estados estado : estados) {
-			selectItems.add(new SelectItem(estado.getId(), estado.getNome()));
+			selectItems.add(new SelectItem(estado, estado.getNome()));
 		}
 		
 		return selectItems;

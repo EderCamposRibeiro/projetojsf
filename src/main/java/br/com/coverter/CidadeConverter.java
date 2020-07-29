@@ -20,13 +20,13 @@ public class CidadeConverter implements Converter, Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Override /*Retorna o objeto inteiro*/
-	public Object getAsObject(FacesContext context, UIComponent component, String cidade) throws ConverterException {
+	public Object getAsObject(FacesContext context, UIComponent component, String codigoCidade) throws ConverterException {
 		
 		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
-		Cidades cidades = (Cidades) entityManager.find(Cidades.class, Long.parseLong(cidade));
+		Cidades cidades = (Cidades) entityManager.find(Cidades.class, Long.parseLong(codigoCidade));
 		
 		return cidades;
 	}
@@ -37,8 +37,8 @@ public class CidadeConverter implements Converter, Serializable{
 		    return null;
 		}
 			
-		if (cidade instanceof Estados) {
-		    return ((Estados) cidade).getId().toString();
+		if (cidade instanceof Cidades) {
+		    return ((Cidades) cidade).getId().toString();
 		} else {
 		    return cidade.toString();
 		}
