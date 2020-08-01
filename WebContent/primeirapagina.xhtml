@@ -12,7 +12,7 @@
 
 	<ui:include src="/menu.xhtml" />
 	
-	<h:form id="formPessoa" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+	<h:form id="formPessoa" enctype="multipart/form-data" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 	
 		<h:messages infoStyle="color:green;background:#6495ED"/>
 
@@ -24,6 +24,10 @@
 			
 			<h:outputLabel for="id" value="Id:" />
 			<h:inputText id="id" value="#{pessoaBean.pessoa.id}" readonly="true" />
+			
+
+			<h:outputLabel value="Foto:" />
+			<h:inputFile id="foto" value="#{pessoaBean.arquivofoto}"></h:inputFile>
 			
 			<h:outputLabel for="nome" value="Nome:" />
 			<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true" 

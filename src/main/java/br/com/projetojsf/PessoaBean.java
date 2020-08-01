@@ -20,6 +20,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -49,8 +50,16 @@ public class PessoaBean implements Serializable {
 	private List<SelectItem> estados;
 
 	private List<SelectItem> cidades;
+	
+	/*Objeto para trazer o aquivo via upload*/
+	/*Essa classe cria temporariamente um objeto no lado do servidor*/
+	private Part arquivofoto;
 
 	public String salvar() {
+		
+		/*É necessário processar a imagem antes de salvar*/
+		System.out.println(arquivofoto);
+		
 		pessoa = daoGeneric.merge(pessoa);
 		carregarPessoas();
 		mostrarMsg("Cadastrado com sucesso!");
@@ -242,5 +251,13 @@ public class PessoaBean implements Serializable {
 	public void listenerCombo(ValueChangeEvent changeEvent) {
 		System.out.println(changeEvent);
 	}	
+	
+	public void setArquivofoto(Part arquivofoto) {
+		this.arquivofoto = arquivofoto;
+	}
+	
+	public Part getArquivofoto() {
+		return arquivofoto;
+	}
 
 }
