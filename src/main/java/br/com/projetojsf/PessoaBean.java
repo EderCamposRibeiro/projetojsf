@@ -1,6 +1,9 @@
 package br.com.projetojsf;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -258,6 +261,33 @@ public class PessoaBean implements Serializable {
 	
 	public Part getArquivofoto() {
 		return arquivofoto;
+	}
+	
+	/*Metodo que converte inputstream para array de bytes*/
+	private byte[] getByte (InputStream is) throws IOException {
+		/*Percorre linha por linha do arquivo para converter para bytes*/
+		/*É um pouco complicado de entender, mas funciona como uma "receita de bolo" para converter arquivos*/
+		
+		int len;
+		int size = 1024;
+		byte[] buf = null;
+		if (is instanceof ByteArrayInputStream) {
+			size = is.available();
+			buf = new byte[size];
+			len = is.read(buf, 0, size);
+		} else {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			buf = new byte[size];
+			
+			while ((len = is.read(buf, 0, size)) != -1) {
+				bos.write(buf, 0, len);
+			}
+			
+			buf = bos.toByteArray();
+		}
+		
+		return buf;
+		
 	}
 
 }
