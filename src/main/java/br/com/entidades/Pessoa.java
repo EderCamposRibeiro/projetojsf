@@ -68,7 +68,7 @@ public class Pessoa implements Serializable {
 	
 	private String extensao; /*extensão jpg, pnh, jpeg, etc*/
 	
-	@Lob/*Usado para gravar arquivos no banco de dados*/
+    @Lob/*Usado para gravar arquivos no banco de dados*/
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] fotoIconBase64Original;
 	

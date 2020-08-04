@@ -1,5 +1,7 @@
 package br.com.projetojsf;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,8 +24,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -53,16 +57,45 @@ public class PessoaBean implements Serializable {
 	private List<SelectItem> estados;
 
 	private List<SelectItem> cidades;
-	
-	/*Objeto para trazer o aquivo via upload*/
-	/*Essa classe cria temporariamente um objeto no lado do servidor*/
+
+	/* Objeto para trazer o aquivo via upload */
+	/* Essa classe cria temporariamente um objeto no lado do servidor */
 	private Part arquivofoto;
 
-	public String salvar() {
+	public String salvar() throws IOException {
+
+		/* Início Processar Imagem - É necessário processar a imagem antes de salvar */
+		byte[] imagemByte = getByte(arquivofoto.getInputStream());
+		pessoa.setFotoIconBase64Original(imagemByte);/*Salva a imagem original*/
 		
-		/*É necessário processar a imagem antes de salvar*/
-		System.out.println(arquivofoto);
+		/*Transformar em bufferimage*/
+		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
 		
+		/*Pega o tipo da imagem - Temos que descobrir o tipo da imagem*/
+		int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+		
+		int largura = 200;
+		int altura = 200;
+		
+		/*Criar a miniatura -> Precisa de outro BufferedImage para a miniatura*/
+		BufferedImage resizedImage = new BufferedImage(largura, altura, type);
+		Graphics2D g = resizedImage.createGraphics();
+		g.drawImage(bufferedImage, 0, 0, largura, altura, null);
+		g.dispose();
+		
+		/*Escrever novamente a imagem em tamanho menor*/
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		String extensao = arquivofoto.getContentType().split("\\/")[1];  /*image/png*/
+		ImageIO.write(resizedImage, extensao, baos);
+		
+		String miniImagem = "data:" + arquivofoto.getContentType() + ";base64," + 
+							DatatypeConverter.printBase64Binary(baos.toByteArray());
+		/*Processa Imagem*/
+		pessoa.setFotoIconBase64(miniImagem);
+		pessoa.setExtensao(extensao);
+		
+		/* Fim Processar Imagem */
+
 		pessoa = daoGeneric.merge(pessoa);
 		carregarPessoas();
 		mostrarMsg("Cadastrado com sucesso!");
@@ -208,9 +241,10 @@ public class PessoaBean implements Serializable {
 			pessoa.setEstados(estado);
 
 			List<Cidades> cidades = JPAUtil.getEntityManager()
-					//.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
-			        .createQuery("Select c from Cidades c where c.estados.id = " + estado.getId()).getResultList();
-			
+					// .createQuery("from Cidades where estados.id = " +
+					// estado.getId()).getResultList();
+					.createQuery("Select c from Cidades c where c.estados.id = " + estado.getId()).getResultList();
+
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
 			for (Cidades cidade : cidades) {
@@ -221,16 +255,17 @@ public class PessoaBean implements Serializable {
 
 		}
 	}
-	
+
 	public void editar() {
 		if (pessoa.getCidades() != null) {
 			Estados estado = pessoa.getCidades().getEstados();
 			pessoa.setEstados(estado);
 
 			List<Cidades> cidades = JPAUtil.getEntityManager()
-					//.createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
-			        .createQuery("Select c from Cidades c where c.estados.id = " + estado.getId()).getResultList();
-			
+					// .createQuery("from Cidades where estados.id = " +
+					// estado.getId()).getResultList();
+					.createQuery("Select c from Cidades c where c.estados.id = " + estado.getId()).getResultList();
+
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
 			for (Cidades cidade : cidades) {
@@ -239,7 +274,6 @@ public class PessoaBean implements Serializable {
 
 			setCidades(selectItemsCidade);
 
-			
 		}
 	}
 
@@ -250,24 +284,27 @@ public class PessoaBean implements Serializable {
 	public void setCidades(List<SelectItem> cidades) {
 		this.cidades = cidades;
 	}
-	
+
 	public void listenerCombo(ValueChangeEvent changeEvent) {
 		System.out.println(changeEvent);
-	}	
-	
+	}
+
 	public void setArquivofoto(Part arquivofoto) {
 		this.arquivofoto = arquivofoto;
 	}
-	
+
 	public Part getArquivofoto() {
 		return arquivofoto;
 	}
-	
-	/*Metodo que converte inputstream para array de bytes*/
-	private byte[] getByte (InputStream is) throws IOException {
-		/*Percorre linha por linha do arquivo para converter para bytes*/
-		/*É um pouco complicado de entender, mas funciona como uma "receita de bolo" para converter arquivos*/
-		
+
+	/* Metodo que converte inputstream para array de bytes */
+	private byte[] getByte(InputStream is) throws IOException {
+		/* Percorre linha por linha do arquivo para converter para bytes */
+		/*
+		 * É um pouco complicado de entender, mas funciona como uma "receita de bolo"
+		 * para converter arquivos
+		 */
+
 		int len;
 		int size = 1024;
 		byte[] buf = null;
@@ -278,16 +315,16 @@ public class PessoaBean implements Serializable {
 		} else {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			buf = new byte[size];
-			
+
 			while ((len = is.read(buf, 0, size)) != -1) {
 				bos.write(buf, 0, len);
 			}
-			
+
 			buf = bos.toByteArray();
 		}
-		
+
 		return buf;
-		
+
 	}
 
 }
