@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import br.com.jpautil.JPAUtil;
+import oracle.net.aso.t;
 
 public class DaoGeneric<E> implements Serializable{
 	
@@ -81,6 +82,17 @@ public class DaoGeneric<E> implements Serializable{
 		entityManager.close();
 		
 		return retorno;
+	}
+	
+	public E consultar(Class<E> entidade, String codigo) {
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		
+		E objeto = (E) entityManager.find(entidade, Long.parseLong(codigo));
+		entityTransaction.commit();
+		return objeto;
+		
 	}
 	
 }
